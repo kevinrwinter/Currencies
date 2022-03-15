@@ -102,16 +102,16 @@ const conversionResult = document.querySelector("#conversion-result");
 // Test it out in the browser tab.
 
 const getConversionRates = () => {
-  const baseCurrency = document.querySelector("#base-currency").value;
-  const targetCurrency = document.querySelector("#target-currency").value;
+  // const baseCurrency = document.querySelector("#base-currency").value;
+  // const targetCurrency = document.querySelector("#target-currency").value;
 
   const API = new FetchWrapper("https://v6.exchangerate-api.com/v6/66507ff79c1dc7c61ec22725/latest/");
 
-  console.log(`https://v6.exchangerate-api.com/v6/66507ff79c1dc7c61ec22725/latest${baseCurrency}`);
+  // console.log(`https://v6.exchangerate-api.com/v6/66507ff79c1dc7c61ec22725/latest${baseCurrency.value}`);
 
-  API.get(`${baseCurrency}`).then((data) => {
-    conversionResult.textContent = data.conversion_rates[targetCurrency];
-    console.log(data.conversion_rates[targetCurrency]);
+  API.get(`${baseCurrency.value}`).then((data) => {
+    conversionResult.textContent = data.conversion_rates[targetCurrency.value];
+    // console.log(data.conversion_rates[targetCurrency]);
   });
 };
 
