@@ -62,6 +62,57 @@ const targetCurrency = document.querySelector("#target-currency");
 const conversionResult = document.querySelector("#conversion-result");
 // Create a function called getConversionRates and add a console.log(“New currency selected”) inside of it
 
-const getConversionRates = () => {};
+// *
+// const API = new FetchWrapper();
+// API.baseURL = "https://v6.exchangerate-api.com/v6/66507ff79c1dc7c61ec22725/latest/";
+
+// document.addEventListener("change", (e) => {
+//   if (baseCurrency.value === "USD") {
+//     getConversionRates(baseCurrency.value, targetCurrency.value);
+//   } else if (baseCurrency.value === "CAD") {
+//     getConversionRates(baseCurrency.value, targetCurrency.value);
+//   } else if (baseCurrency.value === "INR") {
+//     getConversionRates(baseCurrency.value, targetCurrency.value);
+//   } else if (baseCurrency.value === "EUR") {
+//     getConversionRates(baseCurrency.value, targetCurrency.value);
+//   }
+// });
+
+// function getConversionRates(baseCurrency, targetCurrency) {
+//   if (targetCurrency === "USD") {
+//     API.get(baseCurrency).then((data) => {
+//       conversionResult.textContent = data?.conversion_rates?.USD;
+//     });
+//   } else if (targetCurrency === "EUR") {
+//     API.get(baseCurrency).then((data) => {
+//       conversionResult.textContent = data?.conversion_rates?.EUR;
+//     });
+//   } else if (targetCurrency === "CAD") {
+//     API.get(baseCurrency).then((data) => {
+//       conversionResult.textContent = data?.conversion_rates?.CAD;
+//     });
+//   } else if (targetCurrency === "INR") {
+//     API.get(baseCurrency).then((data) => {
+//       conversionResult.textContent = data?.conversion_rates?.INR;
+//     });
+//   }
+// }
+// *
 // Whenever the user choose a new value for the base currency, you need to call the getConversionRates function.
 // Test it out in the browser tab.
+
+const getConversionRates = () => {
+  const baseCurrency = document.querySelector("#base-currency").value;
+  const targetCurrency = document.querySelector("#target-currency").value;
+
+  const API = new FetchWrapper("https://v6.exchangerate-api.com/v6/66507ff79c1dc7c61ec22725/latest/");
+
+  console.log(`https://v6.exchangerate-api.com/v6/66507ff79c1dc7c61ec22725/latest${baseCurrency}`);
+
+  API.get(`${baseCurrency}`).then((data) => {
+    conversionResult.textContent = data.conversion_rates[targetCurrency];
+    console.log(data.conversion_rates[targetCurrency]);
+  });
+};
+
+document.addEventListener("change", getConversionRates);
